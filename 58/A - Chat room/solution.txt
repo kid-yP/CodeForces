@@ -1,0 +1,1 @@
+s = input()hello = "hello"j = 0for words in s:    if words == hello[j]:        j += 1        if j == len(hello):          breakif j == len(hello):    print("YES")else:    print("NO")
