@@ -1,0 +1,1 @@
+t = int(input())for _ in range(t):    n = int(input())    alice_cards = 0    bob_cards = 0     i = 1            while n > 0:        cards = min(i, n)        if i % 4 == 0 or i % 4 == 1:            alice_cards += cards        else:            bob_cards += cards        n -= cards        i += 1    print(alice_cards, bob_cards)
