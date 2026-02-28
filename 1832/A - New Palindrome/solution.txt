@@ -1,0 +1,1 @@
+t= int(input())for _ in range(t):    s = input().strip()     i, j = 0, len(s) - 1    palindrom = False    while i < j:        if s[i] != s[0] or s[j] != s[0]:            palindrom = True            break        i += 1        j -= 1    if palindrom:        print("YES")    else:        print("NO")
