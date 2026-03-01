@@ -1,0 +1,1 @@
+n, k = map(int, input().split())arr = list(map(int, input().split())) inst = []for i in range(n):    inst.append((arr[i], i + 1)) inst.sort() tot_days = 0ans = [] for days, idx in inst:    if tot_days + days <= k:        tot_days += days        ans.append(idx)    else:        break print(len(ans))if ans:    print(*ans)
