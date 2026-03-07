@@ -1,0 +1,1 @@
+t = int(input())for _ in range(t):    s = input().strip()        s = sorted(s)     left = "".join(s)    right = "".join(reversed(s))        print(left + right)
