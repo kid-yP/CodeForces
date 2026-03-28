@@ -1,0 +1,1 @@
+t = int(input())for _ in range(t):    n = int(input())    arr = list(map(int, input().split()))    d = len(set(arr))    if (n - d) % 2 == 0:        print(d)    else:        print(d - 1)
