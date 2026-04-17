@@ -1,0 +1,1 @@
+t = int(input())for _ in range(t):    n, m = map(int, input().split())    x = input().strip()    s = input().strip()        ops = 0        while len(x) <= 100:        if s in x:            print(ops)            break        x += x        ops += 1    else:        print(-1)
