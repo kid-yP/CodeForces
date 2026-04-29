@@ -1,34 +1,20 @@
-from collections import deque
- 
-t = int(input())
-for _ in range(t):
+for _ in range(int(input())):
     n = int(input())
-    s = [input().strip() for _ in range(n)]
+    graph = [input().strip() for _ in range(n)]
     
-    adj = [[] for _ in range(n + 1)]
-    indeg = [0] * (n + 1)
+    deg = [0] * n
     
-    for i in range(1, n + 1):
-        for j in range(i + 1, n + 1):
-            if s[i - 1][j - 1] == '1':
-                adj[i].append(j)
-                indeg[j] += 1
+    for i in range(n):
+        for j in range(i + 1, n):
+            if graph[i][j] == '1':
+                deg[min(i, j)] += 1
             else:
-                adj[j].append(i)
-                indeg[i] += 1
+                deg[max(i, j)] += 1
+                
+    permutuation = [0] * n
     
-    q = deque()
-    for i in range(1, n + 1):
-        if indeg[i] == 0:
-            q.append(i)
+    for u in range(n):
+        pos = n - deg[u]
+        permutuation[pos-1] = u+1
     
-    perm = []
-    while q:
-        u = q.popleft()
-        perm.append(u)
-        for v in adj[u]:
-            indeg[v] -= 1
-            if indeg[v] == 0:
-                q.append(v)
-    
-    print(*perm)
+    print(*permutuation)
