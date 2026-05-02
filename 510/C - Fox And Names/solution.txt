@@ -1,47 +1,46 @@
 from collections import deque
 n = int(input())
+names = [input().strip() for _ in range(n)]
+ 
+graph = [[] for _ in range(26)]
+indeg = [0] * 26
+ 
+for i in range(n - 1):
+    s = names[i]
+    t = names[i + 1]
+    
+    found = False
+    
+    for j in range(min(len(s), len(t))):
+        if s[j] != t[j]:
+            u = ord(s[j]) - ord('a')
+            v = ord(t[j]) - ord('a')
+            graph[u].append(v)
+            indeg[v] += 1
+            found = True
+            break
+    
+    if not found and len(s) > len(t):
+        print("Impossible")
+        exit()
+ 
+q = deque()
+for i in range(26):
+    if indeg[i] == 0:
+        q.append(i)
  
 res = []
-for _ in range(n):
-    res.append(input())
  
-insert = [0] * 26
-graph = [[] for _ in range(26)]
+while q:
+    u = q.popleft()
+    res.append(u)
+    
+    for v in graph[u]:
+        indeg[v] -= 1
+        if indeg[v] == 0:
+            q.append(v)
  
-flag = 1
-for i in range(1, n):
-    a = res[i]
-    b = res[i - 1]
-    if len(b) > len(a) and b[: len(a)] == a:
-        flag = 0
-        break
- 
-    if a[: len(b)] == b:
-        continue
- 
-    for j in range(min(len(a), len(b))):
-        if a[j] != b[j]:
-            graph[ord(b[j]) - ord("a")].append(ord(a[j]) - ord("a"))
-            insert[ord(a[j]) - ord("a")] += 1
-            break
- 
-qu = deque()
- 
-for i in range(26):
-    if insert[i] == 0:
-        qu.append(i)
- 
-ans = []
-while qu:
-    ch = qu.popleft()
-    ans.append(chr(ord("a") + ch))
- 
-    for ne in graph[ch]:
-        insert[ne] -= 1
-        if insert[ne] == 0:
-            qu.append(ne)
- 
-if len(ans) != 26 or not flag:
+if len(res) != 26:
     print("Impossible")
 else:
-    print("".join(ans))
+    print(''.join(chr(x + ord('a')) for x in res))
