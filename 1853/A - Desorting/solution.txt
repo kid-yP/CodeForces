@@ -1,0 +1,22 @@
+t = int(input())
+for _ in range(t):
+    n = int(input())
+    a = list(map(int, input().split()))
+ 
+    ok = False
+    for i in range(n - 1):
+        if a[i] > a[i + 1]:
+            ok = True
+            break
+ 
+    if ok:
+        print(0)
+        continue
+ 
+    ans = float('inf')
+ 
+    for i in range(n - 1):
+        d = a[i + 1] - a[i]
+        ans = min(ans, d // 2 + 1)
+ 
+    print(ans)
