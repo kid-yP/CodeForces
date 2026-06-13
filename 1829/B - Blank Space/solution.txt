@@ -4,13 +4,14 @@ for _ in range(t):
     a = list(map(int, input().split()))
  
     max_len = 0
-    current = 0
+    cur = 0
  
     for x in a:
         if x == 0:
-            current += 1
-            max_len = max(max_len, current)
+            cur += 1
+            if cur > max_len:
+                max_len = cur
         else:
-            current = 0
+            cur = 0
  
     print(max_len)
